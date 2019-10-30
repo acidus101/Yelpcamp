@@ -13,7 +13,9 @@ let campgroundRoutes = require("./routes/campgrounds"),
     commentRoutes     = require("./routes/comments"),
     indexRoutes       = require("./routes/index");
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", {useNewUrlParser: true, useUnifiedTopology: true,  useCreateIndex: true });
+// DATABASEURL environment variavle consists of url of your local database
+mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true,  useCreateIndex: true });
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.set("view engine", "ejs");
@@ -53,4 +55,4 @@ app.get("*", (req, res) => {
 });
 
 // listener
-app.listen("3000", () => console.log("The yelpcamp server has started!!!"));
+app.listen(process.env.PORT || 3000, () => console.log("The yelpcamp server has started!!!"));
